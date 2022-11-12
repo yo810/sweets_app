@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  namespace :public do
+    root to: "homes#top"
+    get "homes/about" => "homes#about", as: "about"
+  end
+
+  namespace :admin do
+    get "top" => "homes#top"
+    resources :items
+    resources :costomers, only: [:index, :show, :edit]
+    resources :genres, only: [:index, :edit]
+  end
+
   #顧客用
   devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
