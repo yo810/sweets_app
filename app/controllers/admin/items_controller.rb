@@ -23,6 +23,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
+    @item = Itme.find(params[:id])
   end
 
   def item_params
