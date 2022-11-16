@@ -3,9 +3,10 @@
     <div class="col-md-9 mx-auto">
 
       <h3>商品一覧</h3>
+      <%= link_to "新規登録", new_admin_item_path, class: "float-right" %>
 
       <table class="table table-hover table-bordered table-condensed">
-        <thead>
+        <thead class="thead">
           <tr>
             <th>商品ID</th>
             <th>商品名</th>
@@ -19,10 +20,12 @@
         <tr>
           <td class="col-xs-1"><%= item.id %></td>
           <td class="text-left">
-            <%= item.name %>
+            <%= link_to admin_item_path(item.id), class: "btn-link text-dark" do %>
+              <%= item.name %>
+            <% end %>
           </td>
           <td class="text-right col-xs-1"><%= item.price %></td>
-          <td class="text-left col-xs-3"><%= item.genre.name %></td>
+          <td class="text-left col-xs-3"><%= item.genre_id %></td>
           <td class="col-xs-2">
             <% if item.is_active == true %>
               <p class="text-success">販売中</p>

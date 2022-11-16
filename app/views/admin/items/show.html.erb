@@ -3,7 +3,11 @@
  <h2>商品詳細</h2>
  <div class="row">
    <div class="mt-5 col-md-5">
-     <%= image_tag @item.image(200, 200) %>
+    <% if @item.image.attached? %>
+      <%= image_tag @item.image, size: "300x200" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "300x200" %>
+    <% end %>
    </div>
 
    <div class="mt-5 col-md-5">
@@ -19,7 +23,7 @@
 
      <div class="row">
        <p class="col-md-4">ジャンル</p>
-       <P class="col-md-8"><%= @item.genre.name %></P>
+       <P class="col-md-8"><%= @item.genre_id %></P>
      </div>
 
      <div class="row">
@@ -29,13 +33,13 @@
 
      <div class="row">
        <p class="col-md-4">販売ステータス</p>
-       <P class="col-md-8">
-         <%= if @item.is_active == true %>
+        <P class="col-md-8">
+         <% if @item.is_active == true %>
            <span class="text-success">販売中</span>
-         <% elsif item.is_active == false %>
+         <% elsif @item.is_active == false %>
            <span class="text-muted">販売停止中</span>
          <% end %>
-       </P>
+        </P>
      </div>
      <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success btn-lg pull-right" %>
    </div>

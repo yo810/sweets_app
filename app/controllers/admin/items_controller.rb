@@ -19,12 +19,24 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
-    @item = Itme.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Itme.find(params[:id])
+    @item = Item.find(params[:id])
   end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+       flash[:notice] = "You have update Item successfully"
+       redirect_to admin_item_path(@item.id)
+    else
+       render :edit
+    end
+  end
+
+  private
 
   def item_params
     params.require(:item).permit(:image, :genre_id, :name, :introduction, :price, :is_active)
