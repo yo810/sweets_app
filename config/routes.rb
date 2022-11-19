@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'orderdetails/show'
-  end
   #顧客用
   devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -17,6 +14,7 @@ Rails.application.routes.draw do
   namespace :public do
     root to: "homes#top"
     get "homes/about" => "homes#about", as: "about"
+    resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
   end
 
   namespace :admin do
