@@ -1,3 +1,14 @@
-<div class="container">
-  <h4>本当に退会しますか？</h4>
+<div class="container-unsubscribe container text-center ">
+  <h4><string>本当に退会しますか？</string></h4>
+
+  <div class="mt-5">
+    退会すると、会員登録情報や<br>
+    これまでの購入履歴が閲覧できなくなります。<br>
+    退会する場合は、「退会する」をクリックして下さい。
+  </div>
+
+  <div class="mt-5">
+    <%= link_to "退会しない", public_customers_my_page_path, class: "btn btn-primary mr-5" %>
+    <%= link_to "退会する", public_customer_widhdraw_path, method: :patch, class: "btn btn-danger" %>
+  </div>
 </div>

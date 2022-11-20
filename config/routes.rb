@@ -14,11 +14,14 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
   get "/about", to: "public/homes#about", as: :about
   get "/admin", to: "admin/homes#top", as: :admin
-  get "/customers/my_page", to: "public/customers#show", as: :my_page
-  get "/customers/edit/:id", to: "public/customers#edit", as: :edit
 
   namespace :public do
     resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
+
+    get "my_page", to: "customers#show", as: :customers_my_page
+    get "edit", to: "customers#edit", as: :edit
+    get "unsubscribe" => "customers#unsubscribe", as: "customer_unsubscribe"
+    patch "widhdraw" => "customers#widhdraw", as: "customer_widhdraw"
   end
 
   namespace :admin do
