@@ -1,3 +1,53 @@
 <div class="container">
-  <h4>会員情報編集</h4>
+  <h4 class="pb-3">会員情報編集</h4>
+  <%= form_with model: @customer, url: public_customer_path(@customer) do |f| %>
+    <table class="w-100 public-customer-edit">
+
+      <tr class="row pb-3">
+        <td class="col-md-4">氏名</td>
+        <td class="col-md-8">
+          <%= f.text_field :last_name, class: "mr-4" %>
+          <%= f.text_field :first_name %>
+        </td>
+      </tr>
+      <tr class="row pb-3">
+        <td class="col-md-4">フリガナ</td>
+        <td class="col-md-8">
+          <%= f.text_field :last_name_kana, class: "mr-4" %>
+          <%= f.text_field :first_name_kana %>
+        </td>
+      </tr>
+      <tr class="row pb-3">
+        <td class="col-md-4">郵便番号</td>
+        <td class="col-md-8">
+          <%= f.text_field :postal_code %>
+        </td>
+      </tr>
+      <tr class="row pb-3">
+        <td class="col-md-4">住所</td>
+        <td class="col-md-8">
+          <%= f.text_field :address, class: "w-100" %>
+        </td>
+      </tr>
+      <tr class="row pb-3">
+        <td class="col-md-4">電話番号</td>
+        <td class="col-md-8">
+          <%= f.text_field :telephone_number %>
+        </td>
+      </tr>
+      <tr class="row pb-3">
+        <td class="col-md-4">メールアドレス</td>
+        <td class="col-md-8">
+          <%= f.email_field :email %>
+        </td>
+      </tr>
+
+      <tr class="row pb-3">
+        <td class="col-md-4"></td>
+        <td class="col-md-8">
+          <%= f.submit "編集内容を保存", class: "btn btn-success" %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
 </div>

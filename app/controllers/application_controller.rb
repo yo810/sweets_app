@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource_or_scope)
     if resource_or_scope.is_a?(Admin)
-      admin_items_path
+      admin_path
     else
-      admin_top_path
+      root_path
     end
   end
 
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      new_admin_session_path
+      new_customer_session_path
     end
   end
 

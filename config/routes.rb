@@ -11,14 +11,17 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
   }
 
+  root to: "public/homes#top"
+  get "/about", to: "public/homes#about", as: :about
+  get "/admin", to: "admin/homes#top", as: :admin
+  get "/customers/my_page", to: "public/customers#show", as: :my_page
+  get "/customers/edit/:id", to: "public/customers#edit", as: :edit
+
   namespace :public do
-    root to: "homes#top"
-    get "homes/about" => "homes#about", as: "about"
     resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
   end
 
   namespace :admin do
-    get "top" => "homes#top"
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orderdetails, only: [:show]

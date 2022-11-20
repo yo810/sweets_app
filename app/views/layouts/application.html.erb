@@ -26,13 +26,11 @@
 
             <% if customer_signed_in? %>
               <li class="customer-name">
-                ようこそ、<%= current_customer.last_name %> さん
+                ようこそ、<%= current_customer.full_name %> さん
               </li>
               <li class="ml-4">
-                <%= link_to "会員のみなさまへ", customer_session_path, class: "btn btn-outline-dark" %>
+                <%= link_to "マイページ", my_page_path, class: "btn btn-outline-dark" %>
               </li>
-
-              <!--マイページ-->
               <!--商品一覧-->
               <!--カート-->
               <li class="ml-4 mr-4">
@@ -46,7 +44,7 @@
                 <%= link_to "会員一覧", admin_customers_path, class: 'btn btn-outline-dark' %>
               </li>
               <li class="ml-4">
-                <%= link_to "注文履歴一覧", admin_top_path, class: 'btn btn-outline-dark' %>
+                <%= link_to "注文履歴一覧", admin_path, class: 'btn btn-outline-dark' %>
               </li>
               <!--ジャンル一覧-->
               <li class="ml-4">
@@ -54,7 +52,7 @@
               </li>
             <% else %>
               <li class="ml-4">
-                <%= link_to "About", public_about_path, class: 'btn btn-outline-dark' %>
+                <%= link_to "About", about_path, class: 'btn btn-outline-dark' %>
               </li>
               <li class="ml-4">
                 <%= link_to "商品一覧", admin_items_path, class: 'btn btn-outline-dark' %>
