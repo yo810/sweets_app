@@ -1,1 +1,49 @@
-<h2>注文履歴詳細</h2>
+<div class="container">
+  <div class="admin-order-show pt-5">
+    <h4 class="pb-3">注文履歴一覧</h4>
+    <table class="w-100 admin-order-details-show">
+      <tr class="row pb-3">
+        <th class="col-md-2">購入者</th>
+        <td class="col-md-10">
+          <%= @orderdetails.customer.full_name %>
+        </td>
+      </tr>
+
+      <tr class="row pb-2">
+        <th class="col-md-2">注文日</th>
+        <td class="col-md-10">
+          <%= @orderdetails.created_at %>
+        </td>
+      </tr>
+
+      <tr class="row pb-2">
+        <th class="col-md-2">配送先</th>
+        <td class="col-md-10">
+          <div class="admin-order-details-address mb-2">
+            <p>
+              〒<%= @orderdetails.postal_code %>
+            </p>
+            <p>
+              <%= @orderdetails.address %>
+            </p>
+          </div>
+        </td>
+      </tr>
+
+      <tr class="row pb-2">
+        <th class="col-md-2">支払方法</th>
+        <td class="col-md-10">
+          <%= @orderdetails.payment_method %>
+        </td>
+      </tr>
+
+      <tr class="row pb-2">
+        <th class="col-md-2">注文ステータス</th>
+        <td class="col-md-10">
+
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
