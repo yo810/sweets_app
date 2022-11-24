@@ -31,7 +31,9 @@
               <li class="ml-4">
                 <%= link_to "マイページ", public_customers_my_page_path, class: "btn btn-outline-dark" %>
               </li>
-              <!--商品一覧-->
+              <li class="ml-4">
+                <%= link_to "商品一覧", public_items_path, class: "btn btn-outline-dark" %>
+              </li>
               <!--カート-->
               <li class="ml-4 mr-4">
                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %>

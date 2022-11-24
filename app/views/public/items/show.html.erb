@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="public-items-show pt-3">
+    <table class="w-100 public-items-show">
+      <div class="row">
+        <div class="mt-5 col-md-7">
+          <span class="col-md-5 offset-md-5">
+            <% if @item.image.attached? %>
+              <%= image_tag @item.image, size: "150x100" %>
+            <% else %>
+              <%= image_tag 'no_image', size: "150x100" %>
+            <% end %>
+          </span>
+        </div>
+        <div class="mt-5 col-md-5">
+          <div class="row">
+            <strong class="h4 pb-3"><%= @item.name %></strong>
+          </div>
+          <div class="row">
+            <p class="pb-3"><%= @item.introduction %></p>
+          </div>
+          <div class="row">
+            <strong class="h5">￥<%= @item.price %></strong>
+          </div>
+
+
+        </div>
+      </div>
+    </table>
+  </div>
+</div>

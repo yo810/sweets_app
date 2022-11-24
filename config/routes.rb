@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
-
+    resources :items, only: [:index, :show]
     get "my_page", to: "customers#show", as: :customers_my_page
     get "edit", to: "customers#edit", as: :edit
-    get "unsubscribe" => "customers#unsubscribe", as: "customer_unsubscribe"
-    patch "widhdraw" => "customers#widhdraw", as: "customer_widhdraw"
+    get "unsubscribe" => "customers#unsubscribe", as: :customer_unsubscribe
+    patch "widhdraw" => "customers#widhdraw", as: :customer_widhdraw
   end
 
   namespace :admin do
