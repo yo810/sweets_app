@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   #顧客用
   devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
     resources :items, only: [:index, :show]
+    resources :cartitems, only: [:index, :update, :destroy, :destroy_all, :create]
     get "my_page", to: "customers#show", as: :customers_my_page
     get "edit", to: "customers#edit", as: :edit
     get "unsubscribe" => "customers#unsubscribe", as: :customer_unsubscribe
