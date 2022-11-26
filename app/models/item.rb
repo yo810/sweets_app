@@ -1,12 +1,14 @@
 class Item < ApplicationRecord
 
-  validates :name, :price, presence: true
-  validates :introduction, length: {maximum: 200}
-  validates :price, numericality: { only_integer: true }
+  validates :image, presence: true
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :price, presence: true
 
   has_one_attached :image
 
   has_many :cart_items, dependent: :destroy
+  has_many :order_details, dependent: :destroy
 
   # 消費税を求めるメソッド
   def with_tax_price

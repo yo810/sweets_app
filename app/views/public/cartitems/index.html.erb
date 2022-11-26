@@ -1,50 +1,66 @@
 <div class="container">
-
   <div class="row">
-    <h3>ショッピングカート</h3>
-    <%= link_to "カートを空にする", public_cartitems_destroy_all_path, method: :delete, class: "btn btn-danger d-inline ml-auto", "data-confirm" => "カート内の商品を削除してもよろしいですか？" %>
-  </div>
+    <div class="col-md-8">
+      <h4>ショッピングカート</h4>
+    </div>
+    <div class="col-md-4">
+      <%= link_to "カートを空にする", public_cartitems_destroy_all_path, method: :delete, class: "btn btn-danger", "data-confirm" => "カート内の商品を削除してもよろしいですか？" %>
+    </div>
 
-  <div class="cartitems-index">
-    <table class="mt-5 mb-5 table table-bordered">
-      <thead>
-        <tr class="table-active">
-          <td class="border border-dark">商品名</td>
-          <td class="border border-dark">単価(税込)</td>
-          <td class="border border-dark">数量</td>
-          <td class="border border-dark">小計</td>
-          <td class="border border-dark"></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cart_items.each do |cart_item| %>
+    <div class="col-md-12">
+      <table class="mt-5 mb-5 table table-bordered border-dark">
+        <thead>
           <tr>
-            <td class="border border-dark"><%= cart_item.item.name %></td>
-            <td class="border border-dark"><%= cart_item.item.with_tax_price %></td>
-            <td class="border border-dark">
-
-            </td>
-            <td class="border border-dark"><%= cart_item.subtotal %></td>
-            <td class="border border-dark text-center"><%= link_to "削除する", public_cartitems_path(cart_item), method: :delete, class: "btn btn-danger", "data-confirm" => "#{cart_item.item.name}を削除してもよろしいですか？" %></td>
+            <td class="border border-dark">商品名</td>
+            <td class="border border-dark">単価(税込)</td>
+            <td class="border border-dark">数量</td>
+            <td class="border border-dark">小計</td>
+            <td class="border border-dark"></td>
           </tr>
-        <!--end-->
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td class="border border-dark">
+                <%= image_tag cart_item.item.image, size: "50x50" %>
+                <%= cart_item.item.name %>
+              </td>
+              <td class="border border-dark">
+                <%= cart_item.item.with_tax_price %>
+              </td>
+              <td class="border border-dark">
+                <%= form_with model: cart_item, local: true do |f| %>
+                  <%= f.select :amount, *[1..10] %>
+                  <%= f.submit "変更", class: "btn btn-success" %>
+                <% end %>
+              </td>
+              <td class="border border-dark">
+                <%= cart_item.subtotal %>
+              </td>
+              <td class="border border-dark text-center">
+                <%= link_to "削除する", public_cartitems_path(cart_item), method: :delete, class: "btn btn-danger", "data-confirm" => "#{cart_item.item.name}を削除してもよろしいですか？" %>
+              </td>
+                <% @total += cart_item.subtotal %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="row">
+    <div class="col-md-9">
+      <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
+    </div>
 
-    <%= link_to "買い物を続ける", root_path, class: "col-3 btn btn-primary" %>
-
-    <table class="col-4 ml-auto table table-bordered border-dark">
-      <tbody>
-        <tr>
-          <td class="border border-dark table-active">合計金額</td>
-          <td class="border border-dark"><% @合計金額 += cart_item.subtotal %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="col-md-3">
+      <table class="table table-bordered border-dark">
+          <tr>
+            <td class="border border-dark table-active">合計金額</td>
+            <td class="border border-dark"><% @total %></td>
+          </tr>
+      </table>
+    </div>
   </div>
 
 <!--情報入力に進む-->

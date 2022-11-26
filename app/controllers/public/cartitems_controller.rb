@@ -1,6 +1,7 @@
 class Public::CartitemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items
+    @total = 0
   end
 
   def create
@@ -11,7 +12,7 @@ class Public::CartitemsController < ApplicationController
       redirect_to public_cartitems_path
     else
       flash[:alert] = "個数を選択してください。"
-      render "public/items/show"
+      redirect_to public_cartitems_path
     end
   end
 
@@ -22,8 +23,7 @@ class Public::CartitemsController < ApplicationController
   end
 
   def destroy_all
-    @cart_items = current_customer.cart_items
-    @cart_items.destroy_all
+    current_customer.cart_items.destroy_all
     flash[:alert] = "カートの商品を全て削除しました。。"
     redirect_to public_cartitems_path
   end
