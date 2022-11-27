@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'addresses/index'
+    get 'addresses/edit'
+  end
   #顧客用
   devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -31,6 +35,8 @@ Rails.application.routes.draw do
         post :confirm
       end
     end
+
+    resources :addresses, only:[:index, :edit, :create, :update, :destroy]
   end
 
   namespace :admin do
