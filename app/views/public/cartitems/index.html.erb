@@ -55,14 +55,15 @@
 
     <div class="col-md-3">
       <table class="table table-bordered border-dark">
-          <tr>
-            <td class="border border-dark table-active">合計金額</td>
-            <td class="border border-dark"><% @total %></td>
-          </tr>
+        <tr>
+          <td class="border border-dark table-active">合計金額</td>
+          <td class="border border-dark"><% @total %></td>
+        </tr>
       </table>
     </div>
+
+    <div class="mt-5 mx-auto">
+      <%= link_to "情報入力へ進む", new_public_order_path, class: "btn btn-success" %>
+    </div>
   </div>
-
-<!--情報入力に進む-->
-
 </div>
