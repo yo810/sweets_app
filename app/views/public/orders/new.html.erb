@@ -1,1 +1,30 @@
-<h1>注文情報入力画面</h1>
+<div class="container">
+  <div class="row">
+    <% if @order.errors.any? %>
+　    <div id="error_explanation">
+　      <h2><%= @order.errors.count %> error prohibited this book from being saved:　</h2>
+        <ul>
+          <% @order.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="col-md-12">
+      <h4>注文情報入力</h4>
+      <%= form_with model: @order, url: confirm_public_orders_path do |f| %>
+        <h5><strong>支払方法</strong></h5>
+        <div class="payment_method">
+          <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+          <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+        </div>
+        <div class="payment_method">
+          <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+          <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

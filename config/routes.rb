@@ -19,12 +19,18 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
     resources :items, only: [:index, :show]
     resources :cartitems, only: [:index, :update, :destroy, :create]
-    resources :orders, only: [:new, :confirm, :complete, :create, :index, :show]
+
     get "my_page", to: "customers#show", as: :customers_my_page
     get "edit", to: "customers#edit", as: :edit
     get "unsubscribe" => "customers#unsubscribe", as: :customers_unsubscribe
     patch "widhdraw" => "customers#widhdraw", as: :customers_widhdraw
     delete "cartitems" => "cartitems#destroy_all", as: :cartitems_destroy_all
+    resources :orders, only:[:create, :new, :index, :show] do
+      collection do
+        get :complete
+        post :confirm
+      end
+    end
   end
 
   namespace :admin do
