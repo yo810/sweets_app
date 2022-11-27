@@ -1,5 +1,4 @@
 <div class="container">
-  <div class="row">
     <% if @address.errors.any? %>
 　    <div id="error_explanation">
 　      <h2><%= @address.errors.count %> error prohibited this book from being saved:　</h2>
@@ -11,24 +10,31 @@
       </div>
     <% end %>
 
-    <div class="col-md-12">
       <h4>配送先登録/一覧</h4>
-      <%= from_with model: @address do |f| %>
-      <div>
-        <%=f.label "郵便番号(ハイフンなし)" %>
-        <%= f.text_field :postal_code %>
-      </div>
-      <div>
-        <%= f.label "住所" %>
-        <%= f.text_area :address %>
-      </div>
-      <div>
-        <%= f.label "宛名" %>
-        <%= f.text_field :name %>
-        <%= f.submit "新規登録", class: "btn btn-success" %>
-      </div>
-      <% end %>
-    </div>
+      <%= form_with model: @address, url: public_addresses_path do |f| %>
+      <table class="w-100 public-addresses-index">
+        <tr class="row pb-3">
+          <td class="col-md-3">郵便番号(ハイフンなし)</td>
+          <td class="col-md-8">
+            <%= f.text_field :postal_code %>
+          </td>
+        </tr>
 
-  </div>
+        <tr class="row pb-3">
+          <td class="col-md-3">住所</td>
+          <td class="col-md-8">
+            <%= f.text_field :address, class: "col-8" %>
+          </td>
+        </tr>
+
+        <tr class="row pb-3">
+          <td class="col-md-3">宛名</td>
+          <td class="col-md-8">
+            <%= f.text_field :name %>
+            <%= f.submit "新規登録", class: "btn btn-success ml-5 col-2" %>
+          </td>
+        </tr>
+      </table>
+      <% end %>
+
 </div>
