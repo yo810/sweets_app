@@ -1,4 +1,5 @@
 <div class="container">
+
     <% if @address.errors.any? %>
 　    <div id="error_explanation">
 　      <h2><%= @address.errors.count %> error prohibited this book from being saved:　</h2>
@@ -10,7 +11,7 @@
       </div>
     <% end %>
 
-      <h4>配送先登録/一覧</h4>
+      <h4 class="pb-3">配送先登録/一覧</h4>
       <%= form_with model: @address, url: public_addresses_path do |f| %>
       <table class="w-100 public-addresses-index">
         <tr class="row pb-3">
@@ -36,5 +37,33 @@
         </tr>
       </table>
       <% end %>
+
+      <div class="row">
+        <div class="col-md-8 pt-5">
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>郵便番号</th>
+                <th>住所</th>
+                <th>宛名</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @addresses.each do |address| %>
+              <tr>
+                <td class="col-md-2"><%= address.postal_code %></td>
+                <td class="col-md-4"><%= address.address %></td>
+                <td class="col-md-2"><%= address.name %></td>
+                <td class="text-center">
+                  <%= link_to "編集する", edit_public_address_path(address.id), class: "btn btn-success" %>
+                  <%= link_to "削除する", public_address_path(address.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+                </td>
+              <tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
 </div>
