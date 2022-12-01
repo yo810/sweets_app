@@ -10,9 +10,7 @@
 
   <%= form_with model: @customer, url: public_customer_path(@customer) do |f| %>
 
-    <table class="col-10 public-customer-edit">
-
-      <tr class="row pb-3 px-5">
+      <div class="row pb-3 px-5">
         <td class="col-md-4">氏名</td>
         <td class="col-md-8">
           <%= f.text_field :last_name, class: "mr-4" %>
