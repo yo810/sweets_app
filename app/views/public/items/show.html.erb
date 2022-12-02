@@ -1,42 +1,35 @@
 <div class="container">
-  <div class="row">
-    <div class="mt-5 col-md-2">
-      <h5>ジャンル検索</h5>
-      <p>ケーキ</p>
-      <p>焼き菓子</p>
-      <p>プリン</p>
-      <p>キャンディ</p>
-    </div>
+  <div class="row offset-2">
 
-    <div class="mt-5 col-md-4">
-      <% if @item.image.attached? %>
-        <%= image_tag @item.image, size: "250x200" %>
-      <% else %>
-        <%= image_tag 'no_image', size: "250x200" %>
-      <% end %>
+    <div class="mt-5 col-md-5">
+      <%= image_tag @item.get_image, size: "250x200" %>
     </div>
 
     <div class="mt-5 col-md-6">
-      <table class="table">
-        <div>
-          <p>
-            <h4><%= @item.name %></h4>
-          </p>
-          <p>
-            <h5><%= @item.introduction %></h5>
-          </p>
-          <p>
-            <h4>¥<%= @item.with_tax_price %>(税込)</h4>
-          </p>
-          <p>
-              <%= form_with model: @cart_item do |f| %>
-                <%= f.hidden_field :item_id, :value => @item.id %>
-                <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
-                <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
-              <% end %>
-          </p>
+      <div>
+        <p>
+          <strong><h4><%= @item.name %></h4></strong>
+        </p>
+        <p>
+          <h5 class="mb-5"><%= @item.introduction %></h5>
+        </p>
+        <p>
+          <h4 class="mb-5">¥<%= @item.with_tax_price %>(税込)</h4>
+        </p>
+      </div>
+
+
+      <%= form_with model: @cart_item do |f| %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <div class="row">
+          <div class="col-2">
+            <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
+          </div>
+          <div class="col">
+            <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
+          </div>
         </div>
-      </table>
+      <% end %>
     </div>
   </div>
 </div>
