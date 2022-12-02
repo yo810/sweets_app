@@ -1,9 +1,15 @@
 <div class="container">
- <div class="admin-item-show pt-3">
+  <div class="row mx-auto col-md-10">
+    <h5 class="my-3">
+      <span class="px-3">
+        商品詳細
+      </span>
+    </h5>
+  </div>
 
-  <table class="w-100 admin-items-show">
-    <h4 class="pb-3">商品詳細</h4>
-    <div class="row">
+  <table class="table">
+
+    <div class="row mx-auto">
       <div class="mt-5 col-md-5">
        <% if @item.image.attached? %>
          <%= image_tag @item.image, size: "300x200" %>
@@ -30,21 +36,24 @@
 
         <div class="row">
           <p class="col-md-4">税込価格<br>(税抜価格)</p>
-          <P class="col-md-8"><%= @item.price %></P>
+          <P class="col-md-8">
+            <%= @item.with_tax_price %> (<%= @item.price %>)円
+          </P>
         </div>
 
         <div class="row">
           <p class="col-md-4">販売ステータス</p>
            <P class="col-md-8">
             <% if @item.is_active == true %>
-              <span class="text-success">販売中</span>
-            <% elsif @item.is_active == false %>
-              <span class="text-muted">販売停止中</span>
+              <strong class="text-success">販売中</strong>
+            <% else @item.is_active == false %>
+              <strong class="text-muted">販売停止中</strong>
             <% end %>
            </P>
-        </di>
-        <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success btn-lg pull-right" %>
+        </div>
+        <div class="mx-auto">
+        <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success col-5" %>
+        </div>
     </div>
   </table>
- </div>
 </div>
