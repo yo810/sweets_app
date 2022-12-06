@@ -19,7 +19,7 @@
       </div>
 
 
-      <%= form_with model: @cart_item do |f| %>
+      <%= form_with model: @cart_item, url: public_cartitems_path, scope: :cart_item do |f| %>
         <%= f.hidden_field :item_id, :value => @item.id %>
         <div class="row">
           <div class="col-2">

@@ -17,7 +17,7 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light p-4">
         <div class="container">
-          <span>SweetsApp</span>
+          <a class="navbar-brand" href="/">NaganoCAKE</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -68,13 +68,22 @@
               <li class="ml-4">
                 <%= link_to "ログイン", new_admin_session_path, class: 'btn btn-outline-dark' %>
               </li>
-            <% end %>
 
             </ul>
           </div>
         </div>
       </nav>
+      <% end %>
+
     </header>
-    <%= yield %>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container"></div>
+    </footer>
+
   </body>
 </html>

@@ -29,7 +29,7 @@
                 <%= cart_item.item.with_tax_price %>
               </td>
               <td class="border border-dark">
-                <%= form_with model: cart_item, local: true do |f| %>
+                <%= form_with model: cart_item, url: public_cartitem_path(cart_item.id), method: :patch do |f| %>
                   <%= f.select :amount, *[1..10] %>
                   <%= f.submit "変更", class: "btn btn-success" %>
                 <% end %>
@@ -49,15 +49,15 @@
   </div>
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <table class="table table-bordered border-dark">
         <tr>
           <td class="border border-dark table-active">合計金額</td>
-          <td class="border border-dark"><% @total %></td>
+          <td class="border border-dark"><%= @total.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
