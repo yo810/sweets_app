@@ -40,7 +40,7 @@
           <%= f.label :select_address, "ご自身の住所" %><br>
           〒<%= current_customer.postal_code %>
           <%= current_customer.address %><br>
-          <%= current_customer.first_name %><%= current_customer.last_name %>
+          <%= current_customer.last_name %><%= current_customer.first_name %>
         </div>
 
         <div class="address mb-3 px-3">
@@ -77,7 +77,7 @@
         </div>
 
         <div class="row">
-          <div class="mx-auto mt-4">
+          <div class="mx-auto mt-3">
             <%= f.submit '確認画面へ進む', class: "btn btn-primary" %>
             <% end %>
           </div>

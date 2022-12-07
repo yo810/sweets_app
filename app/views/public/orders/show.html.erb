@@ -49,12 +49,7 @@
             <tr>
               <th>商品合計</th>
               <td>
-                <% @sum = 0 %>
-                <% @order_details.each do |order_detail|%>
-                <% order_detail.sum.to_s(:delimited) %>
-                <% @sum += order_detail.sum %>
-                <% end %>
-                <%= @sum.to_s(:delimited) %>
+                <%= @order.total %>
               </td>
             </tr>
             <tr>
@@ -91,9 +86,12 @@
           <% @order_details.each do |order_detail|%>
             <tr>
               <td><%= order_detail.item.name %></td>
-              <td><%= order_detail.item.add_tax_price.to_s(:delimited) %></td>
+              <td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
               <td><%= order_detail.amount %></td>
-              <td><%= order_detail.sum.to_s(:delimited) %></td>
+              <td>
+                  <% subtotal = order_detail.amount * order_detail.item.with_tax_price %>
+                  <%= subtotal.to_s(:delimited) %>
+              </td>
             </tr>
           <% end %>
         </tbody>

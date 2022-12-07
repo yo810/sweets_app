@@ -8,12 +8,11 @@
       </h5>
 
       <table class="table table-hover table-bordered table-condensed">
-        <thead class="table-light">
+        <thead class="thead-light">
           <tr>
             <th class="col-md-2">購入日時</th>
             <th class="col-md-2">購入者</th>
             <th class="col-md-2">注文個数</th>
-            <th class="col-md-2">注文ステータス</th>
           </tr>
         </thead>
 
@@ -28,13 +27,13 @@
             <td>
               <%= order.customer.full_name %>
             </td>
-              <% total = 0 %>
-              <% order.order_details.each do |order_detail| %>
-              <% total += order_detail.amount %>
-              <% end %>
-              <%= total %>
             <td>
-              <%= order.status %>
+              <% @order_details = order.order_details %>
+              <% @order_details.each do |order_detail| %>
+              <% @total += order_detail.amount %>
+              <% end %>
+              <%= @total_amount %>
+              <% @total_amount = 0 %>
             </td>
           </tr>
         <% end %>
@@ -48,6 +47,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
