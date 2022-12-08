@@ -26,7 +26,7 @@
                 <%= cart_item.item.name %>
               </td>
               <td class="border border-dark">
-                <%= cart_item.item.with_tax_price %>
+                <%= cart_item.item.with_tax_price.to_s(:delimited) %>
               </td>
               <td class="border border-dark">
                 <%= form_with model: cart_item, url: public_cartitem_path(cart_item.id), method: :patch do |f| %>
@@ -35,7 +35,7 @@
                 <% end %>
               </td>
               <td class="border border-dark">
-                <%= cart_item.subtotal %>
+                <%= cart_item.subtotal.to_s(:delimited) %>
               </td>
               <td class="border border-dark text-center">
                 <%= link_to "削除する", public_cartitems_path(cart_item), method: :delete, class: "btn btn-danger", "data-confirm" => "#{cart_item.item.name}を削除してもよろしいですか？" %>

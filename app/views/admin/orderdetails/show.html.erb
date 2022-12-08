@@ -1,49 +1,115 @@
 <div class="container">
-  <div class="admin-order-show pt-5">
-    <h4 class="pb-3">注文履歴詳細</h4>
-    <table class="w-100 admin-order-details-show">
-      <tr class="row pb-3">
-        <th class="col-md-2">購入者</th>
-        <td class="col-md-10">
-          <%= @orderdetails.customer.full_name %>
-        </td>
-      </tr>
-
-      <tr class="row pb-2">
-        <th class="col-md-2">注文日</th>
-        <td class="col-md-10">
-          <%= @orderdetails.created_at %>
-        </td>
-      </tr>
-
-      <tr class="row pb-2">
-        <th class="col-md-2">配送先</th>
-        <td class="col-md-10">
-          <div class="admin-order-details-address mb-2">
-            <p>
-              〒<%= @orderdetails.postal_code %>
-            </p>
-            <p>
-              <%= @orderdetails.address %>
-            </p>
-          </div>
-        </td>
-      </tr>
-
-      <tr class="row pb-2">
-        <th class="col-md-2">支払方法</th>
-        <td class="col-md-10">
-          <%= @orderdetails.payment_method %>
-        </td>
-      </tr>
-
-      <tr class="row pb-2">
-        <th class="col-md-2">注文ステータス</th>
-        <td class="col-md-10">
-
-        </td>
-      </tr>
-
-    </table>
+  <div class="row">
+    <h5 class="my-5">
+      <span class="px-3">
+        注文履歴詳細
+      </span1>
+    </h5>
   </div>
+
+  <div class="row mb-2">
+    <div class="col-2 offset-1">
+      <strong>購入者</strong>
+    </div>
+    <div class="col-5">
+      <%= @order.customer.last_name %>
+      <%= @order.customer.first_name %>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-2 offset-1">
+      <strong>注文日</strong>
+    </div>
+    <div class="col-5">
+      <%= @order.created_at.strftime("%Y-%m-%d") %>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-2 offset-1">
+      <strong>配送先</strong>
+    </div>
+    <div class="col-5">
+      〒<%= @order.postal_code %>
+      <%= @order.address %>
+    </div>
+    <div class="offset-3 col-5">
+      <%= @order.name %>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-2 offset-1">
+      <strong>支払方法</strong>
+    </div>
+    <div class="col-5">
+      <%= @order.payment_method_i18n %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-7 offset-1">
+      <table class="table mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th class="col-1">商品名</th>
+            <th class="col-1">単価(税込)</th>
+            <th class="col-1">数量</th>
+            <th class="col-1">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sum = 0 %>
+          <% @order_details.each do |order_detail|%>
+            <tr>
+              <td>
+                <%= order_detail.item.name %>
+              </td>
+              <td>
+                <%= order_detail.item.add_tax_price.to_s(:delimited) %>
+              </td>
+              <td>
+                <%= order_detail.amount %>
+              </td>
+              <td>
+                <%= order_detail.sum.to_s(:delimited) %>
+                <% @sum += order_detail.sum %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="col-4 align-self-end">
+      <div class="row justify-content-between">
+        <div class="col-6">
+          <strong>商品合計</strong>
+        </div>
+        <div class="col-6">
+          <%= @sum.to_s(:delimited) %>円
+        </div>
+      </div>
+
+      <div class="row justify-content-between">
+        <div class="col-6">
+          <strong>送料</strong>
+        </div>
+        <div class="col-6">
+          <%= @order.shipping_cost %>円
+        </div>
+      </div>
+
+      <div class="row justify-content-between">
+        <div class="col-6">
+          <strong>請求金額合計</strong>
+        </div>
+        <div class="col-6">
+          <%= (@sum+@order.shipping_cost).to_s(:delimited) %>円
+        </div>
+      </div>
+
+    </div>
 </div>

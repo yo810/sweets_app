@@ -1,7 +1,7 @@
 class Public::CartitemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items.all
-    @total = 0
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
   end
 
   def create
@@ -32,18 +32,15 @@ class Public::CartitemsController < ApplicationController
   end
 
   def destroy_all
-    current_customer.cart_items.destroy_all
-    flash[:alert] = "カートの商品を全て削除しました。。"
+    cart_items = current_customer.cart_items.all
+    cart_items.destroy_all
     redirect_to public_cartitems_path
   end
 
   private
 
   def cart_item_params
-    params.require(:cart_item).permit(:item_id, :amount, :customer_id)
+    params.require(:cart_item).permit(:item_id, :amount)
   end
 
-  def item_params
-    params.require(:item).permit(:image, :name, :introduction, :price)
-  end
 end

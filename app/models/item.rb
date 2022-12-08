@@ -1,14 +1,9 @@
 class Item < ApplicationRecord
 
-  validates :image, presence: true
-  validates :name, presence: true
-  validates :introduction, presence: true
-  validates :price, presence: true
-
   has_one_attached :image
 
-  has_many :cart_items, dependent: :destroy
-  has_many :order_details, dependent: :destroy
+  has_many :cart_items
+  has_many :order_details
 
   # 消費税を求めるメソッド
   def with_tax_price
