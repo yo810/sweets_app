@@ -2,10 +2,12 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
   def create
+    # binding.pry
     @order = current_customer.orders.new(order_params)
     @order.save
     @cart_items = current_customer.cart_items.all
     current_customer.cart_items.destroy_all
+    # binding.pry
     @cart_items.each do |cart_item|
       @order_details = @order.order_details.new
       @order_details.order_id = order.id
