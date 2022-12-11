@@ -6,13 +6,12 @@ class Public::OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     @order.save
     @cart_items = current_customer.cart_items.all
-    current_customer.cart_items.destroy_all
     # binding.pry
-    @cart_items.each do |cart_item|
+    current_customer.cart_items.each do |cart_item|
       @order_details = @order.order_details.new
-      @order_details.order_id = order.id
-      @order_details.item_id = cart_item.item.id
-      @order_detail.price = cart_item.item.price
+      @order_details.order_id = @order.id
+      @order_details.item_id = cart_item.item_id
+      @order_detail.price = cart_item.item.price #itemがnill?
       @order_details.amount = cart_item.amount
       @order_details.save
     end
@@ -56,7 +55,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    # @order_details = OrderDetail.where(order_id: params[:id])
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end

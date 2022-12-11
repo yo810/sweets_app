@@ -11,34 +11,43 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
   }
 
+  # トップ画面
   root to: "public/homes#top"
-  get "/about", to: "public/homes#about", as: :about
-  get "/admin", to: "admin/homes#top", as: :admin
 
-  namespace :public do
-    resources :customers, only: [:show, :edit, :update, :unsubscribe, :widhdraw]
+  # scope module:を使用、URLに"public"が表示されないように変更
+  scope module: :public do
+    # 顧客トップ画面
+    get 'homes/about'
+
+    # 商品ページ
     resources :items, only: [:index, :show]
-    resources :cartitems, only: [:index, :update, :destroy, :create]
 
-    get "my_page", to: "customers#show", as: :customers_my_page
-    get "edit", to: "customers#edit", as: :edit
-    get "unsubscribe" => "customers#unsubscribe", as: :customers_unsubscribe
-    patch "widhdraw" => "customers#widhdraw", as: :customers_widhdraw
-    delete "cartitems" => "cartitems#destroy_all", as: :cartitems_destroy_all
-    resources :orders, only:[:create, :new, :index, :show] do
-      collection do
-        get :complete
-        post :confirm
-      end
-    end
+    # 顧客ページ
+    get 'customers/my_page' => 'customers#show', as: :my_page
+    get 'customers/:id/edit' => "customers#edit", as: :edit
+    get 'customers/unsubscribe' => "customers#unsubscribe", as: :unsubscribe
+    patch "customers/widhdraw" => "customers#widhdraw", as: :widhdraw
+    resources :customers, only: [:update]
 
+    # カート内ページ
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete "customers/cart_items" => "cart_items#destroy_all", as: :destroy_all
+
+    # 注文ページ
+    resources :orders, only:[:new, :index, :show]
+    get 'orders/complete' => 'orders#complete', as: :complete
+    post 'orders/confirm' => 'orders#confirm', as: :confirm
+    post 'orders' => 'orders#create', as: :create_order
+
+    # 配送先ページ
     resources :addresses, only:[:index, :edit, :create, :update, :destroy]
   end
 
   namespace :admin do
+    root to: 'homes#top'
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:show, :update]
+    resources :orders, only: [:update]
     resources :orderdetails, only: [:show, :update]
   end
 
