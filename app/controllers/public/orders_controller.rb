@@ -7,11 +7,12 @@ class Public::OrdersController < ApplicationController
     @order.save
     @cart_items = current_customer.cart_items.all
     # binding.pry
-    current_customer.cart_items.each do |cart_item|
+    @cart_items = current_customer.cart_items
+    @cart_items.each do |cart_item|
       @order_details = @order.order_details.new
       @order_details.order_id = @order.id
       @order_details.item_id = cart_item.item_id
-      @order_detail.price = cart_item.item.price #itemがnill?
+      @order_details.price = cart_item.item.price #itemがnill?
       @order_details.amount = cart_item.amount
       @order_details.save
     end

@@ -28,12 +28,11 @@
               <%= order.customer.full_name %>
             </td>
             <td>
-              <% @order_details = order.order_details %>
-              <% @order_details.each do |order_detail| %>
-              <% @total += order_detail.amount %>
+              <% total = 0 %>
+              <% order.order_details.each do |order_detail| %>
+                <% total += order_detail.amount %>
               <% end %>
-              <%= @total_amount %>
-              <% @total_amount = 0 %>
+              <%= total %>
             </td>
           </tr>
         <% end %>
