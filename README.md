@@ -1,6 +1,5 @@
 DMM WEBCAMPの課題で作成したアプリです。
 作成期間：2022/11/03〜2022/12/13
-[こちら](https://morning-bastion-06180.herokuapp.com/)でアプリをチェックできます。
 
 
 # 長野ケーキ (概要)
@@ -83,7 +82,7 @@ DMM WEBCAMPの課題で作成したアプリです。
 ■開発環境
 　AWS Cloud9
 ■フレームワーク
-　ルビー・オン・レール
+　Ruby on Rails
 
 # 環境推奨
 Ruby 3.1以降 Rails 6.1以降
