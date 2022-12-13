@@ -20,7 +20,9 @@
               <%= customer.id %>
             </td>
             <td>
-              <%= link_to customer.full_name, admin_customer_path(customer), class: "text-dark" %>
+              <%= link_to admin_customer_path(customer), class: "text-dark" do %>
+              <%= customer.first_name %><%= customer.last_name %>
+              <% end %>
             </td>
             <td>
               <%= customer.email %>
