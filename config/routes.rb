@@ -23,11 +23,17 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
 
     # 顧客ページ
-    get 'customers/my_page' => 'customers#show', as: :my_page
-    get 'customers/:id/edit' => "customers#edit", as: :edit
-    get 'customers/unsubscribe' => "customers#unsubscribe", as: :unsubscribe
-    patch "customers/widhdraw" => "customers#widhdraw", as: :widhdraw
-    resources :customers, only: [:update]
+    # get 'customers/my_page' => 'customers#show', as: :my_page
+    # get 'customers/edit' => "customers#edit", as: :edit
+    # get 'customers/unsubscribe' => "customers#unsubscribe", as: :unsubscribe
+    # patch "customers/widhdraw" => "customers#widhdraw", as: :widhdraw
+    # resources :customers, only: [:update]
+    resources :customers, only:[:show, :edit, :update] do
+      collection do
+        get :unsubscribe
+        patch :widhdraw
+      end
+    end
 
     # カート内ページ
     resources :cart_items, only: [:index, :update, :destroy, :create]
